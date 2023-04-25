@@ -1,0 +1,89 @@
+<?php
+
+class GalleryUpload {
+
+    function GalleryUploadFunction() {
+        
+        if(isset($_POST['submit'])) {
+            //Grab every input
+            $title = $_POST['title'];
+            $paragraph = $_POST['paragraph'];
+            $fileName = $_POST['filename'];
+            $price = $_POST['price'];
+            $count = $_POST['count'];
+            $dimensions = $_POST['dimensions'];
+            $imgFile = $_FILES['file']; //grabbing the file
+        
+            if(empty($fileName)) { // if this has been left empty
+                $fileName = "gallery";
+            }
+            else {
+                $newFile = strtolower(str_replace(" ", "-",$fileName)); // small caps and built-in function str_replace that replaces any symbol, so if there is spacebar, it will instead join with - symbol                                                // 
+            }
+        
+            $uploadedFileName = $imgFile['name'];
+            $uploadedFileType = $imgFile['type'];
+            $uploadedFileTemp = $imgFile['tmp_name'];
+            $uploadedFileError = $imgFile['error'];
+            $uploadedFileSize = $imgFile['size'];
+        
+            $fileExt = explode(".",$uploadedFileName); // take a part of the name of the file to get only extension
+            $lowerStrExt = strtolower(end($fileExt)); //grabs last index of an array so u get for example .jpg
+        
+            $allowedType = array("jpeg", "jpg", "png", "jfif"); // what kind of filetypes are allowed
+    
+            if(in_array($lowerStrExt, $allowedType)) {
+                if($uploadedFileError == 0) { //no error
+                    if($uploadedFileSize > 20000000) { //less than 2 mb
+                        header("location: ../AllFurniture?error=filesizetoobig");
+                        exit();
+                    }
+                    else {
+                        $imageFullName = $newFile . "." . uniqid("", false) . "." . $lowerStrExt; // makes uniq id after picture's name
+                        $fileDst = "catalogImages/" . $imageFullName;
+        
+                        include_once '../classes/dbh-image.php';
+                            $sqlSelect = "select * from gallery "; //sql
+                            $stmt = mysqli_stmt_init($conn); // prepared statement using $conn variable
+        
+                            if(!mysqli_stmt_prepare($stmt, $sqlSelect)) { //if statement wasnt prepared
+                                echo "<p>SQL statement failed</p>";
+                            }
+                            else {
+                                mysqli_stmt_execute($stmt); // statement actually executes
+                                $result = mysqli_stmt_get_result($stmt); // built-in function to get stmt result on screen
+                                $rowCount = mysqli_num_rows($result); //  gets num of rows of result
+        
+                                $setImageOrder = $rowCount + 1; // column order
+        
+                                $sqlInsert = "insert into gallery (title, paragraph, fileName, galleryOrder, count, price, dimensions) values (?, ?, ?, ?, ?, ?, ?);";
+        
+                                if(!mysqli_stmt_prepare($stmt, $sqlInsert)) {
+                                    echo "<p>Failed</p>";
+                                }
+                                else {
+                                    mysqli_stmt_bind_param($stmt, "sssssss", $title, $paragraph, $imageFullName, $setImageOrder, $count, $price, $dimensions); // parameters that will binded to placeholders (?, ?...)
+                                    mysqli_stmt_execute($stmt);
+        
+                                    move_uploaded_file($uploadedFileTemp, $fileDst);
+                                     
+                                    header("location: ../AllFurniture.php?upoload=success");
+                                }
+                            }
+                    }
+                }
+                else {
+                    echo "<p>Error</p>";
+                }
+            }
+            else {
+                echo "<p>Allowed file types are .jpeg, .jpg, .png or .jfif</p>";
+                exit();
+            }
+    }
+}
+    
+
+}
+
+IZVEIDOT CLASS, IMPORT un Izsaukt funkciju!!!

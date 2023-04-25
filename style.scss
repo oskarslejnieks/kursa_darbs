@@ -1,0 +1,426 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@500&family=Varela+Round&display=swap");
+$white-color: #ffffff;
+$background-opacity: rgba($white-color, 0.5);
+
+body {
+  background-image: url("images/sofa.jfif");
+  background-color: black;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Varela Round", sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+//Header
+header {
+  display: flex;
+  .header-background {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    background: $background-opacity;
+    z-index: 1;
+  }
+  .logo {
+    z-index: 2;
+  }
+  .navbar {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 2;
+    ul {
+      margin-right: 20px;
+      display: flex;
+
+      li {
+        list-style: none;
+
+        padding: 20px;
+        font-size: 25px;
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+//index.php
+
+.home-page-text {
+  text-align: center;
+  .flex {
+    h2 {
+      color: $white-color;
+      font-size: 90px;
+    }
+    h4 {
+      color: $white-color;
+      font-size: 25px;
+    }
+  }
+  button {
+    a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    margin-top: 150px;
+    padding: 8px 15px;
+    background-color: red;
+    border: 1px solid black;
+    font-size: 20px;
+    
+  }
+  button:hover { 
+    background-color:orange;
+    transition: 0.2s;
+    text-decoration: none;
+  }
+}
+
+//Login form style
+
+.form-login-signup {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  .login {
+    background-color: rgba($background-opacity, 0.7);
+    border-radius: 30px;
+    width: 30%;
+    h4 {
+      color: black;
+      text-align: center;
+      font-size: 30px;
+    }
+    .form-login {
+      text-align: center;
+      input {
+        margin: 20px auto;
+        display: block;
+        text-align: center;
+        padding: 10px;
+        width: 250px;
+        border-radius: 8px;
+        border: 1px solid white;
+        font-size: 20px;
+      }
+      button {
+        padding: 8px 15px;
+        border: 1px solid black;
+        font-size: 20px;
+        width: 200px;
+        background-color: rgb(2, 0, 36);
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(121, 9, 83, 1) 0%,
+          rgba(77, 82, 145, 1) 48%,
+          rgba(0, 99, 255, 1) 100%
+        );
+      }
+      .error {
+        font-size: 19px;
+        color: red;
+        font-weight: bold;
+      }
+      .success {
+        font-size: 19px;
+        color: green;
+        font-weight: bold;
+      }
+    }
+  }
+}
+// All furniture
+section {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+      .container {
+    
+        justify-self: center;
+        width: 75%;
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+        margin: 30px 0;
+        background-color: rgb(2, 0, 36);
+            background: linear-gradient(
+              90deg,
+              rgba(2, 0, 36, 0.5) 0%,
+              rgba(121, 9, 83, 0.5) 0%,
+              rgba(77, 82, 145, 0.5) 48%,
+              rgba(0, 99, 255, 0.5) 100%
+            );
+            .error {
+              font-size: 19px;
+              color: red;
+              font-weight: bold;
+              margin: 20px auto;
+            }
+            form {
+              margin-top: 30px;
+              flex-flow: row wrap;
+              width: 100%;
+              display: flex;
+              .btn-delete {
+                height: 50px;
+                position: absolute;
+                margin-left: 82.5%;
+                margin-top: 500px;
+                background-color: rgb(2, 0, 36);
+                      background: linear-gradient(
+                        90deg,
+                        rgba(2, 0, 36, 1) 0%,
+                        rgba(121, 9, 83, 1) 0%,
+                        rgba(77, 82, 145, 1) 48%,
+                        rgba(0, 99, 255, 1) 100%
+                      );
+                      color: white;
+                      cursor: pointer;
+                      border: 1px solid black;
+                      border-radius: 8px;
+              }
+              .flexbox {
+                display: flex;
+                  flex-basis: 33%;
+                // width: 100%;
+                
+                a {
+                  text-decoration: none;
+                  width: 100%;
+                  text-align: center;
+                  border-radius: 20px;
+                  background-color: rgba($background-opacity, 1);
+                  margin: 30px;
+                  color: black;
+                  
+                  .img-css {
+                    width: 90%;
+                    height: 250px;
+                    background-size: cover;
+                  }
+                }
+                .image-container {
+                  
+                  input[type='checkbox'] {
+                    position: relative;
+                    cursor: pointer;
+                  }
+                  input[type=checkbox]:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    top: 0;
+                    left: 0;
+                    border: 2px solid #555555;
+                    border-radius: 3px;
+                    background-color: white;
+           }
+               input[type=checkbox]:checked:after {
+                    content: "";
+                    display: block;
+                    width: 5px;
+                    height: 10px;
+                    border: solid black;
+                    border-width: 0 2px 2px 0;
+                    -webkit-transform: rotate(45deg);
+                    -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                    position: absolute;
+                    top: 2px;
+                    left: 6px;
+           }
+                }
+              }
+            }
+        
+  
+  }
+  .sidebar {
+    margin: 30px 0 30px 80px;
+    width: 250px;
+    height: 600px;
+    background-color: rgb(2, 0, 36);
+    background: linear-gradient(356deg, rgba(2,0,36,0.5) 0%, rgba(121,9,83,0.5) 0%, rgba(77,82,145,0.5) 48%, rgba(0,99,255,0.5) 100%);
+    border-radius: 20px;
+    .sidebar-background {
+      margin: 0;
+      border-radius: 20px;
+      ul {
+        margin: 0;
+        a {
+          text-decoration: none;
+          li {
+            list-style: none;
+            color: white;
+            margin: 20px 0 20px 0;
+            font-size: 25px;
+          }
+        } 
+      }
+    }
+  }
+}
+
+//Add new Post Styling
+
+.form-container {
+  display: block;
+  justify-content: center;
+    width: 100%;
+    height: auto;
+    .gallery-upload-form {
+        margin: 20px;
+        h4 {
+          text-align: center;
+          font-size: 40px;
+          color: white;
+        }
+        form {
+          display: block;
+          text-align: center;
+          input {
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+            padding: 10px;
+            width: 250px;
+            border-radius: 8px;
+            border: 1px solid white;
+            font-size: 20px;
+          }
+          textarea {
+            width: 250px;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 15px;
+          }
+          button {
+            padding: 8px 15px;
+            border: 1px solid black;
+            font-size: 20px;
+            width: 200px;
+            background-color: rgb(2, 0, 36);
+            background: linear-gradient(
+              90deg,
+              rgba(2, 0, 36, 1) 0%,
+              rgba(121, 9, 83, 1) 0%,
+              rgba(77, 82, 145, 1) 48%,
+              rgba(0, 99, 255, 1) 100%
+            );
+            color: white;
+          }
+          label {
+            font-size: 20px;
+            color: white;
+          }
+          select {
+            width: 270px;
+            height: 30px;
+            option {
+             font-size: 15px;
+            }
+          }
+        }
+    }
+}
+
+.heading-all {
+  text-align: center;
+  font-size: 75px;
+  color: white;
+}
+.heading-all-center {
+  margin: auto;
+  font-size: 55px;
+  color: white;
+}
+.search-form {
+  margin: 0;
+  input {
+    padding: 10px;
+    margin:20px 0;
+    border-radius: 10px;
+    width: 70%;    
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  }
+  button {
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 20px;
+    text-align: center;
+    width: 80%;
+    border-radius: 10px;
+    
+  }
+  button:hover { 
+    background-color:orange;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+}
+
+//Profile img styling
+
+.imgSection {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  .imgContainer {
+    background-color: $background-opacity;
+    height: 700px;
+    img {
+      margin-top: 20px;
+      margin-left: 35%;
+      border-radius: 50%;
+      width:30%;
+      height:auto;
+    }
+  }
+  
+}
+.single-product {
+  display: flex;
+  justify-content: center;
+  margin-left: 25%;
+  margin-top: 150px;
+  background-color: rgb(2, 0, 36);
+    background: linear-gradient(356deg, rgba(2,0,36,0.5) 0%, rgba(121,9,83,0.5) 0%, rgba(77,82,145,0.5) 48%, rgba(0,99,255,0.5) 100%);
+  width: 50%;
+  background-color: white;
+  form  {
+    margin: 10px auto;
+    input {
+      display: block;
+      padding: 15px;
+      margin: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 10px;
+        border: 1px solid black;
+        font-size: 20px;
+        width: 200px;
+        background-color: rgb(2, 0, 36);
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(121, 9, 83, 1) 0%,
+          rgba(77, 82, 145, 1) 48%,
+          rgba(0, 99, 255, 1) 100%
+        );
+    }
+  }
+}

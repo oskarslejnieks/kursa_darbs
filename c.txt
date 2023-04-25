@@ -1,0 +1,9 @@
+-- Search
+
+-- Profile
+
+--How to do relations mysql php
+
+-- User id and status for FAVORITES page
+
+GALA DARBS

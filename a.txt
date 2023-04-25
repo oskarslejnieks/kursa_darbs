@@ -1,0 +1,129 @@
+Gallery controller 
+
+
+<?php 
+
+class GalleryController extends Gallery{
+
+    private $title; //private because other classes dont need to access them
+    private $paragraph;
+    private $fileName;
+    private $price;
+    private $count;
+    private $dimensions;
+    private $imgFile;
+
+    public function __construct($_title, $_paragraph, $_fileName, $_price, $_count, $_dimensions, $_imgFile) { // constructor lets assign user input in signup form to theese properties
+        $this->title = $_title;
+        $this->paragraph = $_paragraph;
+        $this->fileName = $_fileName;
+        $this->price = $_price;
+        $this->count = $_count;
+        $this->dimensions = $_dimensions;
+        $this->imgFile = $_imgFile;
+    }
+
+    public function checkGallery() {
+        if($this->emptyInput() == false) {
+            header("location: ../signup_form.php?error=emptyinput");
+            exit();
+        }
+        if($this->invalidUid() == false) {
+            header("location: ../signup_form.php?error=invalidusername");
+            exit();
+        }    
+        if($this->invalidEmail() == false) {
+            header("location: ../signup_form.php?error=invalidemail");
+            exit();
+        }   
+        if($this->pwdMatch() == false) {
+            header("location: ../signup_form.php?error=pwddoesntmatch");
+            exit();
+        }  
+        if($this->uidTakenCheck() == false) {
+            header("location: ../signup_form.php?error=usenametaken");
+            exit();
+        }
+
+        $this->setImage($this->title, $this->paragraph, $this->fileName, $this->price, $this->count, $this->dimensions, $this->imgFile);
+    }
+
+    //Error handler empty input
+    public function emptyInput() { 
+        $result = false;
+        if(empty($this->title) || empty($this->paragraph) || empty($this->fileName) || empty($this->price) || empty($this->count) || empty($this->dimensions) || empty($this->imgFile)) {
+            $result = false;
+        }
+        else {
+            $result = true;
+        }
+        return $result;
+    }
+
+    private function invalidUid() {
+        $result = false;
+        if(!preg_match("/^[a-zA-Z0-9]*$/", $this->uid)) {
+            $result = false;
+        }
+        else {
+            $result = true;
+        }
+        return $result;
+    }
+    private function invalidEmail() {
+        $result = false;
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) { //build in php function
+            $result = false;
+        }
+        else {
+            $result = true;
+        }
+        return $result;
+    }
+
+
+    //Password
+    private function pwdMatch() {
+        $result = false;
+        if($this->pwd !== $this->pwdrepeat) { //build in php function
+            $result = false;
+        }
+        else {
+            $result = true;
+        }
+        return $result;
+    }
+    
+
+    private function uidTakenCheck() {
+        $result = false;
+        if(!$this->checkUser($this->uid, $this->email)) { 
+            $result = false;
+        }
+        else {
+            $result = true;
+        }
+        return $result;
+    }
+
+}
+
+
+
+gallery classes 
+
+<?php 
+
+class Gallery extends DbhImage {
+
+    public function setImage($title, $paragraph, $fileName, $price, $count, $dimensions, $imgFile) {
+        $stmt = $this->connectGallery()->prepare('insert into gallery (title, paragraph, fileName, galleryOrder, count, price, dimensions) values (?, ?, ?, ?, ?, ?, ?);');
+
+        if(!$stmt->execute(array($title, $paragraph, $fileName, $price, $count, $dimensions, $imgFile))) {
+            $stmt = null;
+            header("location: ../index.php?error=stmtfailed");
+            exit();
+        }
+        $stmt = null;
+    }
+}
